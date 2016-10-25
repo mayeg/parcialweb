@@ -79,7 +79,6 @@ class UsuarioDao:
                      , "%"+apellidos+"%")
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
-            print data[0]
             if data is None:
                 return 0
             return data[0]
@@ -125,13 +124,12 @@ class UsuarioDao:
             param = (int(usuario_tipo.getTipoUsuario().getId()),)
             self.__cur.execute(query, param)
             data = self.__cur.fetchone()
-            print data, "data dao"
             if data is None:
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
                            nombres=data[4], apellidos=data[5])
         except Exception as e:
-            print e.message, "execpcion"
+            print e.message
             return None
 
     def get_usuario_por_id(self, usuario):

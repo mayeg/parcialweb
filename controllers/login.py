@@ -15,7 +15,7 @@ class Login:
 
     @staticmethod
     def get_home_usuario():
-        return render_template('login/login.html')
+        return render_template('index/index.html')
 
     def get_cambiar_contrasena(self, token):
         usuario = UsuarioDao().get_usuario_por_token(

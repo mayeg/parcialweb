@@ -3,8 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/app.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet"
+          href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/AdminLTE.min.css') }}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/skins/_all-skins.min.css') }}">
+
 </head>
 <body>
+<nav class="navbar navbar-default" role="navigation">
+  <!-- El logotipo y el icono que despliega el menú se agrupan
+       para mostrarlos mejor en los dispositivos móviles -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse"
+            data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Desplegar navegación</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">Logotipo</a>
+  </div>
+
+  <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+       otro elemento que se pueda ocultar al minimizar la barra -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <li><a href="#">Enlace #1</a></li>
+      <li><a href="#">Enlace #2</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Enlace #3</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          Menú #2 <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Acción #1</a></li>
+          <li><a href="#">Acción #2</a></li>
+          <li><a href="#">Acción #3</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Acción #4</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row" style="margin-bottom: 15px">
+    <div class="col-md-12 text-right">
+        <a href="/usuarios/registro" class="btn btn-primary">
+            <i class="fa fa-plus"></i> Registrar usuario
+        </a>
+    </div>
+</div>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2 class="box-title">Lista de usuarios</h2>
+    </div>
+    <div class="box-body">
+        {% if usuarios %}
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Codigo</th>
+                <th class="text-center">Nombres</th>
+                <th class="text-center">Apellidos</th>
+                <th class="text-center">Cedula</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Tipo</th>
+                <th class="text-center">Opciones</th>
+            </tr>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{usuario.getId()}}</td>
+                <td>{{usuario.getCodigo()}}</td>
+                <td>{{usuario.getNombres()}}</td>
+                <td>{{usuario.getApellidos()}}</td>
+                <td>{{usuario.getCedula()}}</td>
+                <td>{{usuario.getEmail()}}</td>
+                <td>{{usuario.getTipoUsuario().getLabel()}}</td>
+                <td class="text-center">
+                    <a href="/usuarios/editar/{{usuario.getId()}}"
+                       class="btn btn-default"><i class="fa fa-edit"></i></a>
+                    <a href="/usuarios/eliminar/{{usuario.getId()}}"
+                       class="btn btn-default"><i class="fa fa-trash-o"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                No existen usuarios registrados en el sistema.
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        Total de usuarios {{total_usuarios}}.
+    </div>
+    <!-- /.box-footer-->
+</div>
+
+<div class="control-sidebar-bg"></div>
+<footer class="main-footer">
+    <div class="pull-right hidden-xs">
+        <b>Version</b> 2.3
+    </div>
+    <strong>Copyright &copy; 2016-2017 <a
+            href="">Mayerly Garcia</a>.
+    </strong> Todos los derechos reservados.
+</footer>
+</div><!-- ./wrapper -->
+
+<!-- jQuery 2.1.4 -->
+<script
+        src="{{ url_for('static', filename='plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/fastclick/fastclick.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/demo.js') }}"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.min.js"></script>
 
 </body>
 </html>
