@@ -19,26 +19,7 @@ class Login:
 
     @staticmethod
     def get_home_usuario():
-        tipos = TipoUsuarioDao().listar_tipo_usuario()
-        if 'usuario' in session:
-            tipoU = session['usuario']['tipo']
-            usuario = UsuarioDao().get_usuario_por_codigo(
-                Usuario(codigo=session['usuario']['codigo']))
-            if tipoU == 2:
-                actas = SecretariaController().get_actas()
-                return render_template('secretaria/home.html', titulo="Inicio",
-                                       usuario=usuario,actas=actas)
-            elif tipoU == 3:
-                trabajos = TrabajoGradoDao().get_trabajos()
-                return render_template('coordinador/home.html', titulo="Inicio",
-                                       usuario=usuario, trabajos=trabajos)
-            elif tipoU == 4:
-                return render_template('jurado/home.html', titulo="Inicio",
-                                      usuario=usuario)
-            elif tipoU == 5:
-                return EstudianteController().get_registrar_propuesta()
-
-        return render_template('login/login.html', tipos=tipos)
+        return render_template('login/login.html')
 
     def get_cambiar_contrasena(self, token):
         usuario = UsuarioDao().get_usuario_por_token(
