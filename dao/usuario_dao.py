@@ -71,7 +71,6 @@ class UsuarioDao:
             print e.message
             return []
 
-
     def get_total_usuarios(self, pagina, codigo, nombres, cedula, apellidos):
         try:
             query = "SELECT Count(*) FROM usuario WHERE codigo LIKE %s AND"  \
