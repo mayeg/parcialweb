@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from dto.tipo_usuario import TipoUsuario
 from dto.usuario import Usuario
 
 
@@ -19,7 +18,7 @@ class UsuarioDao:
             if data is None:
                 return None
             return Usuario(id=data[0], nombres=data[4], codigo=data[1],
-                           contrasena=data[3], tipo_usuario=data[7])
+                           contrasena=data[3])
         except Exception as e:
             print e.message
             return None
@@ -45,9 +44,6 @@ class UsuarioDao:
                 user = Usuario(id=usuario[0], codigo=usuario[1], cedula=usuario[2],
                                contrasena=usuario[3], nombres=usuario[4],
                                apellidos=usuario[5], email=usuario[6])
-                tipo_usuario = TipoUsuario(
-                    id=usuario[8], label=usuario[10], nombre=usuario[9])
-                user.setTipoUsuario(tipo_usuario)
                 resultado.append(user)
             return resultado
         except Exception as e:
@@ -67,10 +63,6 @@ class UsuarioDao:
                 user = Usuario(id=jurado[0], codigo=jurado[1], cedula=jurado[2],
                                contrasena=jurado[3], nombres=jurado[4],
                                apellidos=jurado[5], email=jurado[6])
-
-                tipo_usuario = TipoUsuario(id=jurado[8], label=jurado[10],
-                                       nombre=jurado[9])
-                user.setTipoUsuario(tipo_usuario)
                 resultado.append(user)
 
             return resultado
@@ -106,7 +98,7 @@ class UsuarioDao:
                 return None
             return Usuario(id=data[0], codigo=data[1], cedula=data[2],
                            nombres=data[4], apellidos=data[5], email=data[6],
-                           token_password=data[8], tipo_usuario=data[7])
+                           token_password=data[8])
         except Exception as e:
             print e.message
             return None
@@ -138,8 +130,7 @@ class UsuarioDao:
             if data is None:
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
-                           nombres=data[4], apellidos=data[5],
-                           tipo_usuario=data[7])
+                           nombres=data[4], apellidos=data[5])
         except Exception as e:
             print e.message, "execpcion"
             return None
@@ -153,8 +144,7 @@ class UsuarioDao:
             if data is None:
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
-                           nombres=data[4], apellidos=data[5], email=data[6],
-                           tipo_usuario=data[7])
+                           nombres=data[4], apellidos=data[5], email=data[6])
         except Exception as e:
             print e.message
             return None
@@ -168,8 +158,8 @@ class UsuarioDao:
             if data is None:
                 return None
             return Usuario(id=data[0], cedula=data[2], contrasena=data[3],
-                           nombres=data[4], apellidos=data[5], email=data[6],
-                           tipo_usuario=data[7])
+                           nombres=data[4], apellidos=data[5], email=data[6]
+                           )
         except Exception as e:
             print e.message
             return None

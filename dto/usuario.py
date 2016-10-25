@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-from dto.tipo_usuario import TipoUsuario
 
 
 class Usuario:
 
     def __init__(self, codigo="", cedula="", contrasena="", id=0, nombres="",
-                 apellidos="", email="", tipo_usuario=0, token_password=""):
+                 apellidos="", email="", token_password=""):
         self.__codigo = codigo
         self.__cedula = cedula
         self.__contrasena = contrasena
@@ -13,7 +12,6 @@ class Usuario:
         self.__apellidos = apellidos
         self.__email = email
         self.__id = id
-        self.__tipo_usuario = TipoUsuario(id=tipo_usuario)
         self.__token_password = token_password
 
     def getCodigo(self):
@@ -58,12 +56,6 @@ class Usuario:
     def setEmail(self, email):
         self.__email = email
 
-    def getTipoUsuario(self):
-        return self.__tipo_usuario
-
-    def setTipoUsuario(self, tipo_usuario):
-        self.__tipo_usuario = tipo_usuario
-
     def getTokenPassword(self):
         return self.__token_password
 
@@ -77,7 +69,6 @@ class Usuario:
     def get_dict(self):
         return {
             'nombres': self.__nombres,
-            'tipo': self.__tipo_usuario.getId(),
             'id': self.__id,
             'codigo': self.__codigo
         }
