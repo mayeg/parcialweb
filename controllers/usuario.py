@@ -4,10 +4,8 @@ import hashlib
 
 from flask.helpers import flash
 
-from dao.tipo_usuario_dao import TipoUsuarioDao
 from dao.usuario_dao import UsuarioDao
 from flask import render_template, redirect, url_for, session
-from dto.tipo_usuario import TipoUsuario
 from dto.usuario import Usuario
 
 
@@ -30,9 +28,7 @@ class UsuarioController:
             'codigo': "", 'nombres': "", 'apellidos': "", 'cedula': "",
             'contrasena': "", 'email': ""
         }
-        tipos = TipoUsuarioDao().listar_tipo_usuario()
-        return render_template("usuarios/registro.html", usuario=usuario,
-                               tipos=tipos)
+        return render_template("usuarios/registro.html", usuario=usuario)
 
     def crear_usuario(self, codigo, nombres, apellidos, cedula, email, contrasena,
                       tipo_usuario):
@@ -47,9 +43,8 @@ class UsuarioController:
         if UsuarioDao().get_usuario_por_codigo(usuario) is not None:
             flash("Ya existe un usuario con el codigo {}.".format(
                 usuario.getCodigo()), "error")
-            tipos = TipoUsuarioDao().listar_tipo_usuario()
             return render_template(
-                "usuarios/registro.html", usuario=usuario_error, tipos=tipos)
+                "usuarios/registro.html", usuario=usuario_error)
 
         if UsuarioDao().crear_usuario(usuario):
             flash("El usuario se creo correctamente.", "success")
@@ -77,12 +72,11 @@ class UsuarioController:
             'cedula': usuario_e.getCedula(), 'email': usuario_e.getEmail(),
             'tipo_usuario': usuario_e.getTipoUsuario()
         }
-        tipos = TipoUsuarioDao().listar_tipo_usuario()
+
         if usuario_e is None:
             flash("El usuario que intenta editar no existe.", "error")
         return render_template(
-            "secretaria/editar.html", usuario_edit=usuario_edit, id=id_usuario,
-            tipos=tipos)
+            "secretaria/editar.html", usuario_edit=usuario_edit, id=id_usuario)
 
     def editar_usuario(self, nombres, apellidos, cedula, email, tipo_usuario,
                        id):
