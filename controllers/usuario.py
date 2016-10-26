@@ -4,9 +4,9 @@ import hashlib
 
 from flask.helpers import flash
 
-from dao.usuario_dao import UsuarioDao
+from dao.cliente_dao import UsuarioDao
 from flask import render_template, redirect, url_for, session
-from dto.usuario import Usuario
+from dto.cliente import Cliente
 
 
 class UsuarioController:
