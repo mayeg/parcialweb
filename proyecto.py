@@ -23,4 +23,4 @@ app.config['MYSQL_DATABASE_HOST'] = 'sandbox2.ufps.edu.co'
 mysql.init_app(app)
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5001)
+    app.run(debug=True, port=5001)

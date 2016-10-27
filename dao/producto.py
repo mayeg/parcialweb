@@ -46,7 +46,7 @@ class ProductoDao:
 
     def modificar_existencias(self, producto):
         try:
-            query = "UPDATE producto SET exitencias= %s WHERE id=%s "
+            query = "UPDATE producto SET existencias= %s WHERE id=%s "
             param = (producto.getExistencias(), producto.getId())
             self.__cur.execute(query, param)
             self.__conn.commit()

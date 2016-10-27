@@ -35,15 +35,15 @@ class DetalleVentaController:
             total_descuentos = 0
             total_iva = 0
             for producto in productos:
-                cantidad = formulario.get('producto_' + producto.getId(), None)
+                cantidad = int(formulario.get('producto_' + producto.getId(), None))
                 if cantidad is not None and int(cantidad) > 0:
-                    if producto.getExistencias >= cantidad:
+                    if producto.getExistencias() >= cantidad:
                         producto.setExistencias(producto.getExistencias() - cantidad)
                         productos_modificados.append(producto)
                         detalle = DetalleVenta(
                             producto.getId(), cantidad=int(cantidad))
                         detalle = self.calcular_iva_descuento(producto, detalle)
-                        detalle.setTotal(int(cantidad)*producto.getPrecioVenta +
+                        detalle.setTotal(int(cantidad)*producto.getPrecioVenta() +
                                          detalle.getValorIva() - detalle.getValorDescuentos())
                         detalle_venta.append(detalle)
                         total += detalle.getTotal()
@@ -58,10 +58,11 @@ class DetalleVentaController:
                           valoriva=total_iva, valordescuentos=total_descuentos)
 
             if VentaDao().crear_venta(venta):
-
+                print "holi"
                 venta = VentaDao().get_ultima_venta()
+                print venta
                 for detalle in detalle_venta:
-                    detalle.setIdFactura(venta.getNumeroFactura())
+                    detalle.setIdFactura(Venta(numerofactura=venta.getNumeroFactura()))
                     DetalleVentaDao().crearDetalleVenta(detalle)
                 for producto in productos_modificados:
                     ProductoDao().modificar_existencias(producto)

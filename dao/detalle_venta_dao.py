@@ -12,12 +12,15 @@ class DetalleVentaDao:
 
     def crearDetalleVenta(self, detalle):
         try:
-            query = "INSERT INTO detalleventa (idproducto, idfactura, cantidad, valoriva" \
-                    "valordescuento) VALUES (%s, %s, %s, %s, %s)"
-            param = (detalle.getIdProducto(), detalle.getIdFactura, detalle.getCantidad(),
-                     detalle.getValorIva(), detalle.getValorDescuentos)
+            print detalle.getIdProducto().getId()
+            print detalle.getIdFactura().getNumeroFactura()
+            query = "INSERT INTO detalleventa (idproducto, idfactura, cantidad, valoriva, " \
+                    "valordescuento, total) VALUES (%s, %s, %s, %s, %s, %s)"
+            param = (str(detalle.getIdProducto().getId()), int(detalle.getIdFactura().getNumeroFactura()), int(detalle.getCantidad()),
+                     float(detalle.getValorIva()), float(detalle.getValorDescuentos()), float(detalle.getTotal()))
             self.__cur.execute(query, param)
             self.__conn.commit()
+            print "aqui"
             return True
         except Exception as e:
             print e.__class__

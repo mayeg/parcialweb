@@ -24,7 +24,7 @@ class VentaDao:
 
     def get_ultima_venta(self):
         try:
-            query = "SELECT * FROM venta ORDER BY id DESC LIMIT 1"
+            query = "SELECT * FROM venta ORDER BY numerofactura DESC LIMIT 1"
             self.__cur.execute(query)
             ven = self.__cur.fetchone()
             if ven is None:
