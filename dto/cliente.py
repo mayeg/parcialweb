@@ -45,5 +45,7 @@ class Cliente:
         return {
             'nombres': self.__nombres,
             'id': self.__id,
-            'apellidos': self.__apellidos
+            'apellidos': self.__apellidos,
+            'direccion': self.__direccion,
+            'telefono': self.__telefono
         }

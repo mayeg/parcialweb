@@ -7,10 +7,13 @@ class VentaDao:
         self.__conn = mysql.connect()
         self.__cur = self.__conn.cursor()
 
-    def crearVenta(self, venta):
+    def crear_venta(self, venta):
         try:
-            query = "INSERT INTO venta (numeroventa, idcliente) VALUES (%s, %s)"
-            param = (venta.getNumeroFactura(), venta.getIdCliente().getId())
+            query = "INSERT INTO venta (idcliente, valoriva, valordescuentos, " \
+                    "valortotal) VALUES (%s, %s, %s, %s)"
+            param = (venta.getIdCliente().getId(),
+                     venta.getValorIva(), venta.getValorDescuentos(),
+                     venta.getValorTotal())
             self.__cur.execute(query, param)
             self.__conn.commit()
             return True
@@ -19,16 +22,14 @@ class VentaDao:
             print e.message
             return False
 
-    def get_venta_numero(self, numero):
+    def get_ultima_venta(self):
         try:
-            query = "SELECT * FROM venta WHERE numerofactura=%s "
-            param = (numero,)
-            self.__cur.execute(query, param)
-            data = self.__cur.fetchone()
-            if data is None:
+            query = "SELECT * FROM venta ORDER BY id DESC LIMIT 1"
+            self.__cur.execute(query)
+            ven = self.__cur.fetchone()
+            if ven is None:
                 return None
-            return Venta(numerofactura=data[0])
-
-        except Exception as e:
-            print e.message
-            return None
+            venta = Venta(ven[0], ven[1], ven[2], ven[3], ven[4])
+            return venta
+        except:
+            return Venta()

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <!-- El logotipo y el icono que despliega el menú se agrupan
+         para mostrarlos mejor en los dispositivos móviles -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Desplegar navegación</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Logotipo</a>
+    </div>
+
+    <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+         otro elemento que se pueda ocultar al minimizar la barra -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="#">Enlace #1</a></li>
+            <li><a href="#">Enlace #2</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Enlace #3</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Menú #2 <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Acción #1</a></li>
+                    <li><a href="#">Acción #2</a></li>
+                    <li><a href="#">Acción #3</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Acción #4</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="box box-primary">
+    {% block contenido %} {% endblock %}
+</div>
+
+<div class="control-sidebar-bg"></div>
+<footer class="main-footer">
+    <div class="pull-right hidden-xs">
+        <b>Version</b> 2.3
+    </div>
+    <strong>Copyright &copy; 2016-2017 <a
+            href="">Mayerly Garcia</a>.
+    </strong> Todos los derechos reservados.
+</footer>
+
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/proyecto.js') }}"></script>
+</body>
+</html>

@@ -24,6 +24,9 @@ class DetalleVenta:
     def setIdFactura(self, idfactura):
         self.__idfactura = idfactura
 
+    def getValorDescuentos(self):
+        return self.__valordescuentos
+
     def getCantidad(self):
         return self.__cantidad
 

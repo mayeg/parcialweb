@@ -1,5 +1,7 @@
 
 from dto.producto import Producto
+
+
 class ProductoDao:
 
     def __init__(self):
@@ -15,9 +17,13 @@ class ProductoDao:
             resultado = list()
             if data is None:
                 return []
-            for usuario in data:
-                producto = Producto(id=usuario[0], nombre=usuario[1],)
-                list.append(producto)
+            for producto in data:
+                producto = Producto(id=producto[0], nombre=producto[1],
+                                    tipo=producto[2], precioventa=producto[3],
+                                    existencias=producto[4],
+                                    costounitario=producto[5],
+                                    saldoinventario=producto[6])
+                resultado.append(producto)
             return resultado
         except Exception as e:
             print e.message
@@ -37,4 +43,16 @@ class ProductoDao:
         except Exception as e:
             print e.message
             return []
+
+    def modificar_existencias(self, producto):
+        try:
+            query = "UPDATE producto SET exitencias= %s WHERE id=%s "
+            param = (producto.getExistencias(), producto.getId())
+            self.__cur.execute(query, param)
+            self.__conn.commit()
+            return True
+        except Exception as e:
+            print e.__class__
+            print e.message
+            return False
 

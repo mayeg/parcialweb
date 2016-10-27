@@ -24,37 +24,6 @@ class DetalleVentaDao:
             print e.message
             return False
 
-    def get_productos(self):
-        try:
-            query = "SELECT * FROM producto "
-            self.__cur.execute(query)
-            data = self.__cur.fetchall()
-            resultado = list()
-            if data is None:
-                return []
-            for usuario in data:
-                producto = Producto(id=usuario[0], nombre=usuario[1])
-                list.append(producto)
-            return resultado
-        except Exception as e:
-            print e.message
-            return []
-
-    def get_clientes(self):
-        try:
-            query = "SELECT * FROM clientes "
-            self.__cur.execute(query)
-            data = self.__cur.fetchall()
-            resultado = list()
-            if data is None:
-                return []
-            for usuario in data:
-                cliente = Cliente(id=usuario[0], nombres=usuario[1])
-                list.append(cliente)
-            return resultado
-        except Exception as e:
-            print e.message
-            return []
 
     def get_total_cantidad(self):
         try:

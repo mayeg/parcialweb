@@ -1,0 +1,79 @@
+{% extends "plantillas/plantilla.html" %}
+{% block contenido %}
+<form action="/registro_venta" method="POST">
+    <div class="col-md-12">
+        {% if error != "" %}
+        <div class="alert alert-danger text-center">
+            {{error}}
+        </div>
+        {% endif %}
+        {% if success != "" %}
+        <div class="alert alert-success text-center">
+            {{success}}
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-md-3 col-xs-12">
+        <label>Seleccione el cliente</label>
+    </div>
+    <div class="col-md-9 col-xs-12">
+        <select name="cliente" class="form-control" id="cliente" required>
+            <option value="">Seleccione un cliente</option>
+            {% for cliente in clientes %}
+            <option value="{{cliente.getId()}}"> {{cliente.getNombres()}} {{cliente.getApellidos()}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-12" id="facturaTotal" style="display:none">
+        <br />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Dirección</th>
+                    <th>Telefono</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="nombresCliente"></td>
+                    <td id="apellidosCliente"></td>
+                    <td id="direccionCliente"></td>
+                    <td id="telefonoCliente"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+
+        <div class="row">
+            {% for producto in productos %}
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {{ producto.getNombre() }}
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <strong>Precio Unitario: </strong> {{ producto.getPrecioVenta() }}
+                        </p>
+                        <label class="col-md-5">Cantidad: </label>
+                        <div class="col-md-7">
+                            <input type="number" class="form-control" name="producto_{{producto.getId()}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+            <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Registrar Venta
+                </button>
+            </div>
+        </div>
+
+    </div>
+</form>
+{% endblock %}
